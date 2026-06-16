@@ -1,34 +1,31 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Setup (Get your free key from https://aistudio.google.com/)
-genai.configure(api_key="YOUR_API_KEY_HERE")
+# Setup
+genai.configure(api_key=st.secrets["GOOGLE_API_KEY"]) # Use Streamlit secrets for security
 
-st.set_page_config(layout="wide")
-st.title("🏛️ Academic Knowledge Navigator")
+st.title("🎓 The Socratic Bridge Tutor")
+st.subheader("I don't give answers; I help you find them.")
 
-# Sidebar for Navigation
-page = st.sidebar.selectbox("Navigate", ["Page 1: Curriculum", "Page 6: Deep Research"])
+if "messages" not in st.session_state:
+    st.session_state.messages = [{"role": "assistant", "content": "What concept are you struggling with today?"}]
 
-if page == "Page 1: Curriculum":
-    st.header("JNTUH/OU Syllabus & Reference Mapping")
-    branch = st.selectbox("Select Branch", ["EEE", "CSE", "AI/ML"])
-    subject = st.selectbox("Select Subject", ["Power Electronics", "Operating Systems", "Neural Networks"])
+# Display chat
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# Socratic Logic
+if prompt := st.chat_input("Ask about any subject..."):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"): st.markdown(prompt)
+
+    model = genai.GenerativeModel("gemini-2.0-flash")
+    # THE SOCRATIC PROMPT
+    system_instruction = "You are a Socratic tutor. Never provide direct answers. Instead, ask probing questions that guide the student to the answer based on their JNTUH/OU curriculum."
     
-    if st.button("Fetch Syllabus & References"):
-        st.info(f"Displaying syllabus for {subject}...")
-        st.write("📖 **Recommended Books:** Standard University Textbooks + NPTEL Links")
-        st.success("🎯 GATE Mapping: [Link to GATE/NET Syllabus]")
-
-else:
-    st.header("🧠 Page 6: AI-Powered Research Analysis")
-    uploaded_file = st.file_uploader("Upload 1000+ Page PDF", type="pdf")
-    tone = st.selectbox("Select Persona", ["Munna Bhai Lingo", "Ivy League Student", "MIT/Harvard PhD"])
+    response = model.generate_content(f"{system_instruction}\nStudent says: {prompt}")
     
-    if uploaded_file and st.button("Generate Analysis"):
-        model = genai.GenerativeModel("gemini-2.5-flash")
-        with st.spinner("Analyzing document..."):
-            # Simple prompt engineering
-            prompt = f"Explain this document in the tone of {tone}."
-            st.write(f"**Research Summary ({tone}):**")
-            st.write("This tool is analyzing your document using Gemini's native long-context window, providing persona-based synthesis for academic democratization.")
+    with st.chat_message("assistant"):
+        st.markdown(response.text)
+        st.session_state.messages.append({"role": "assistant", "content": response.text})
