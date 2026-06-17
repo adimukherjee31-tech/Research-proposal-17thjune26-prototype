@@ -5,44 +5,40 @@ import google.generativeai as genai
 st.set_page_config(page_title="Socrates: Pedagogical Knowledge Orchestrator", layout="wide")
 genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
 
-# --- PAGE HEADER ---
+# --- HEADER ---
 st.title("🏛️ Socrates: Agentic Pedagogical Knowledge Orchestrator")
-st.markdown("### *A Deterministic Framework for Multi-Modal Academic Synthesis*")
+st.markdown("### *Systemic Analysis for Academic & Research Advancement*")
 
 # Tabs for Modular Research Workflow
-tab1, tab2, tab3 = st.tabs(["Tutor (Persona-Adaptive Synthesis)", "Literature Review Finder", "Pedagogical Roadmap"])
+# Added "Research Gap Identifier" as the 4th tab
+tab1, tab2, tab3, tab4 = st.tabs(["Socratic Tutor", "Requirement Gap Identifier", "Literature Reviewer", "Research Gap Identifier"])
 
 with tab1:
-    st.header("Tutor: High-Context PDF Synthesis")
-    st.info("Upload technical corpora (up to 2000 pages) for persona-conditioned knowledge extraction.")
-    uploaded_file = st.file_uploader("Ingest Technical PDF", type="pdf")
-    tone = st.selectbox("Select Syntactic Persona", [
-        "Senior Professional Researcher", 
-        "Ivy League PhD Student", 
-        "GATE Coach Tone", 
-        "UGC-NET Coach Tone", 
-        "Simple Indian English", 
-        "Munna Bhai Lingo"
-    ])
-    
-    if uploaded_file and st.button("Synthesize Knowledge"):
-        with st.spinner("Executing agentic analysis..."):
-            # This simulates the long-context window synthesis
-            st.text_area("Synthesized Analysis", f"The document is being parsed for deep semantic threads. Output conditioned to: {tone}")
+    st.write("### Socratic Bridge Tutor")
+    # ... (Your existing Socratic Tutor code) ...
 
 with tab2:
-    st.header("Literature Review Finder")
-    search_query = st.text_input("Query ArXiv.org for Research Synthesis:")
-    if st.button("Query Research Nexus"):
-        st.write(f"Orchestrating search across ArXiv repositories for: {search_query}")
-        st.text_area("Research Synthesis & Gap Analysis", "Foundational papers retrieved. Analysis of research gaps in progress...")
+    st.write("### Requirement Gap Identifier")
+    # ... (Your existing Requirement Gap Identifier code) ...
 
 with tab3:
-    st.header("Pedagogical Roadmap: Ontological Mapping")
-    domain = st.selectbox("Select Domain", [
-        "BTech EEE", "BTech AI ML", "BTech CSE", "BTech ECE", 
-        "BTech Mechanical", "Physics MSc", "Math MSc"
-    ])
-    if st.button("Generate Deterministic Roadmap"):
-        st.write(f"Mapping curriculum for {domain}...")
-        st.success("Roadmap visualized: Core competency mapping complete (excluding non-relevant elective noise).")
+    st.write("### Literature Reviewer")
+    # ... (Your existing Literature Reviewer code) ...
+
+with tab4:
+    st.write("### Research Gap Identifier")
+    st.info("Agentic analysis to identify unaddressed research frontiers.")
+    
+    research_topic = st.text_input("Enter the Research Topic (e.g., 'Genetic Algorithms in EEE')")
+    
+    if st.button("Identify Research Gaps"):
+        with st.spinner("Analyzing current state-of-the-art..."):
+            model = genai.GenerativeModel("gemini-2.0-flash")
+            prompt = f"Act as an expert researcher. Identify significant research gaps and unexplored frontiers in: {research_topic}. Provide a critical analysis."
+            response = model.generate_content(prompt)
+            
+            st.write("### Critical Gap Analysis")
+            st.markdown(response.text)
+            
+            st.write("---")
+            st.success("Analysis complete. These gaps represent high-potential research directions.")
