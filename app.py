@@ -17,7 +17,7 @@ st.markdown("### *A Deterministic Framework for Multi-Modal Academic Synthesis*"
 # Tabs for Modular Research Workflow
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "Tutor (Persona-Adaptive Synthesis)", 
-    "Requirement Gap Identifier", 
+    "Research Gap Identifier", 
     "Literature Review Finder", 
     "Pedagogical Roadmap",
     "NPTEL Asynchronous Pedagogical Transcoding Engine"
@@ -36,7 +36,7 @@ with tab1:
             st.text_area("Synthesized Analysis", f"Parsed for deep semantic threads. Output conditioned to: {tone}")
 
 with tab2:
-    st.header("Requirement Gap Identifier")
+    st.header("Research Gap Identifier")
     domain = st.selectbox("Select Domain", ["EEE", "AI/ML", "CSE", "ECE", "Mechanical", "Physics MSc", "Math MSc"])
     exam = st.selectbox("Target Assessment", ["GATE", "IIT-JAM", "CUET", "UGC-NET"])
     user_query = st.text_area("Specific topic or chapter to analyze:")
