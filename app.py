@@ -1,37 +1,25 @@
-# --- Update Tabs to include the 5th Tab ---
+import streamlit as st
+import google.generativeai as genai
+
+# 1. Page Config sabse upar
+st.set_page_config(page_title="Socrates: Pedagogical Knowledge Orchestrator", layout="wide")
+
+# 2. API Key setup
+try:
+    genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+except Exception as e:
+    st.error("API Key not found.")
+
+# 3. Header
+st.title("🏛️ Socrates: Agentic Pedagogical Knowledge Orchestrator")
+
+# 4. Yahan aayega tera Tabs definition (Ab error nahi aayega!)
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "Tutor (Persona-Adaptive Synthesis)", 
     "Requirement Gap Identifier", 
     "Literature Review Finder", 
     "Pedagogical Roadmap",
-    "NPTEL Asynchronous Pedagogical Transcoding Engine" # Updated Fancy Tab Name
+    "NPTEL Asynchronous Pedagogical Transcoding Engine"
 ])
 
-# --- Add Tab 5 Implementation ---
-with tab5:
-    st.header("NPTEL Asynchronous Pedagogical Transcoding Engine")
-    st.markdown("""
-    *A high-fidelity framework for the semantic distillation of asynchronous lecture transcripts. 
-    This module performs a critical deconstruction of pedagogical discourse into structured 
-    conceptual modules.*
-    """)
-    
-    # Box 1: Input
-    transcript_input = st.text_area("Ingest Lecture Transcript Vector:", height=200, 
-                                    placeholder="Paste the raw YouTube/NPTEL transcript here...")
-    
-    # Button to execute
-    if st.button("Transcode & Distill"):
-        with st.spinner("Executing semantic decomposition..."):
-            model = genai.GenerativeModel("gemini-2.0-flash")
-            prompt = f"""
-            Act as an elite Ivy League Academic Fellow. Perform a pedagogical distillation 
-            of the following lecture transcript. Deconstruct the primary conceptual threads, 
-            resolve technical ambiguity, and reconstruct the output into a 
-            concise, highly structured pedagogical summary: {transcript_input}
-            """
-            response = model.generate_content(prompt)
-            
-            # Box 2: Output
-            st.markdown("### Distilled Conceptual Output")
-            st.write(response.text)
+# Ab baaki ke 'with tabX:' blocks yahan neeche likho...
