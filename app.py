@@ -20,7 +20,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "Requirement Gap Identifier", 
     "Literature Review Finder", 
     "Pedagogical Roadmap",
-    "NPTEL Video Simplifier/ Explainer"
+    "NPTEL Asynchronous Pedagogical Transcoding Engine"
 ])
 
 with tab1:
@@ -70,4 +70,15 @@ with tab5:
     transcript_input = st.text_area("Ingest Lecture Transcript Vector:", height=200, placeholder="Paste the raw YouTube/NPTEL transcript here...")
     
     if st.button("Transcode & Distill"):
-        with st
+        with st.spinner("Executing semantic decomposition..."):
+            model = genai.GenerativeModel("gemini-2.0-flash")
+            prompt = f"""
+            Act as an elite Ivy League Academic Fellow. Perform a pedagogical distillation 
+            of the following lecture transcript. Deconstruct the primary conceptual threads, 
+            resolve technical ambiguity, and reconstruct the output into a 
+            concise, highly structured pedagogical summary: {transcript_input}
+            """
+            response = model.generate_content(prompt)
+            
+            st.markdown("### Distilled Conceptual Output")
+            st.write(response.text)
