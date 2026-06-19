@@ -20,7 +20,7 @@ module = st.sidebar.radio("Navigate Modules", [
     "NPTEL Transcoding Engine",
     "Philosophy & Epistemology",
     "Discovery Pathway",
-    "CogniBridge: Vernacular Pedagogical Synthesis Engine"
+    "CogniBridge (Vernacular: Banglish)"
 ])
 
 # --- MAIN CONTENT AREA ---
@@ -91,8 +91,8 @@ elif module == "Discovery Pathway":
     st.write(f"**Inquiry:** {data['Inquiry']}")
     st.write(f"**Computational Thinking:** {data['Computational Thinking']}")
 
-elif module == "CogniBridge: Vernacular Pedagogical Synthesis Engine":
-    st.header("CogniBridge: Vernacular Pedagogical Synthesis Engine")
+elif module == "CogniBridge (Vernacular: Banglish)":
+    st.header("CogniBridge (Vernacular: Banglish)")
     st.markdown("<sub>*Translates your dense, dry textbook to simple banglish*</sub>", unsafe_allow_html=True)
     
     tab1, tab2 = st.tabs(["1. Upload Technical Corpus", "2. Vernacular Synthesis Interface"])
