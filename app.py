@@ -36,7 +36,9 @@ if module == "Tutor (Persona-Adaptive)":
         "MIT STEM Professor Insights", 
         "Harvard STEM Lecturer Lingo", 
         "Stanford STEM Instructor Perspective", 
-        "Indian University Profession"
+        "Indian University Profession",
+        "GATE Coaching Instructor",
+        "UGCNET Coach"
     ])
     if uploaded_file and st.button("Synthesize"):
         st.info(f"Synthesizing knowledge with persona: {tone}")
@@ -106,57 +108,4 @@ elif module == "Philosophy and Epistemology":
 
     with st.expander("4. Greek Philosophy to STEM"):
         st.write("**Socratic Method:** Dialectical inquiry for debugging and AI alignment.")
-        st.write("**Aristotelian Logic:** Foundation for computational syllogism.")
-        st.write("**Platonic Forms:** Abstract mathematical modeling.")
-
-    with st.expander("5. Japanese Philosophy to STEM"):
-        st.write("**Ma:** Negative space in signal processing/field theory.")
-        st.write("**Mono no Aware:** Aesthetic/ethical modeling of finite data states.")
-        st.write("**Wabi-Sabi:** Heuristic approximations and fault-tolerant systems.")
-        st.write("**Shuhari:** Learning stages for machine learning mastery.")
-
-    with st.expander("6. Universities Teaching Philosophy of STEM"):
-        st.write("- **MIT:** Philosophy of Physics & AI Ethics")
-        st.write("- **Oxford:** Philosophy of Mathematics & CS")
-        st.write("- **IIT Bombay:** Philosophy of Science & Logic")
-        st.write("- **Tsinghua University:** Philosophy of Technology")
-        st.write("- **University of Tokyo:** Philosophy of Robotics & Engineering")
-
-elif module == "Discovery Pathway":
-    st.header("Discovery Pathway: Inquiry, Critical Thinking & Computational Skills")
-    pathway_data = {
-        "EEE": {"Problem": "Designing power grids.", "Inquiry": "How to minimize energy waste?", "Computational Thinking": "Decompose into logical stages.", "Critical Thinking": "Evaluate thermal limits.", "Examples": "IoT solar controller; Audio noise filter."},
-        "AI": {"Problem": "Mimicking intelligence.", "Inquiry": "How do models determine context?", "Computational Thinking": "Break down text into tokens.", "Critical Thinking": "Question data bias.", "Examples": "College admissions chatbot; Fake news flagger."}
-    }
-    selected_domain = st.selectbox("Select Domain", list(pathway_data.keys()))
-    data = pathway_data[selected_domain]
-    st.write(f"**Inquiry:** {data['Inquiry']}")
-    st.write(f"**Computational Thinking:** {data['Computational Thinking']}")
-
-elif module == "CogniBridge (Vernacular: Banglish)":
-    st.header("CogniBridge (Vernacular: Banglish)")
-    st.markdown("<sub>*Translates your dense, dry textbook to simple banglish*</sub>", unsafe_allow_html=True)
-    
-    tab1, tab2 = st.tabs(["1. Upload Technical Corpus", "2. Vernacular Synthesis Interface"])
-    
-    with tab1:
-        st.subheader("Ingestion of Ontological Material")
-        uploaded_file = st.file_uploader("Upload core academic PDF for ingestion", type="pdf")
-        if uploaded_file:
-            st.success(f"Successfully indexed: {uploaded_file.name}")
-            st.caption("Status: Awaiting semantic distillation.")
-            
-    with tab2:
-        st.subheader("Vernacular Dialectical Explanation")
-        st.info("Demonstration: PhD Entrance Examination Prep (Topic: Relational Algebra)")
-        
-        st.markdown("""
-        > **Original Academic Text:** "The relational algebra projection operator ($\pi$) serves to extract a specified subset of attributes from a relation, effectively collapsing the horizontal dimensionality of the database schema while maintaining set-theoretic uniqueness."
-        
-        **CogniBridge Synthesis (Banglish Mode):**
-        "Dekho, projection operator mane holo database theke specific column-gulo tula ana. Imagine koro tumi ekta table theke shudhu 'Student Name' ar 'Roll Number' chaitecho, baki information dorkar nai. Ei $\pi$ operator seta-i kore—tumi je attribute-gulo select korbe, shudhu seta-i return korbe. Simple kothay, table-er width komey jay, but duplicate row delete hoye unique data thake."
-        """)
-        
-        user_input = st.text_area("Synthesize a new concept from the uploaded corpus:")
-        if st.button("Distill to Banglish"):
-            st.write("Synthesizing vernacular pedagogical output...")
+        st.write("**Aristotelian
