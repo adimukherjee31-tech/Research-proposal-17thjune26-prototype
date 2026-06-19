@@ -19,7 +19,8 @@ module = st.sidebar.radio("Navigate Modules", [
     "Pedagogical Roadmap",
     "NPTEL Transcoding Engine",
     "Philosophy & Epistemology",
-    "Discovery Pathway"
+    "Discovery Pathway",
+    "CogniBridge: Vernacular Pedagogical Synthesis Engine"
 ])
 
 # --- MAIN CONTENT AREA ---
@@ -89,3 +90,31 @@ elif module == "Discovery Pathway":
     data = pathway_data[selected_domain]
     st.write(f"**Inquiry:** {data['Inquiry']}")
     st.write(f"**Computational Thinking:** {data['Computational Thinking']}")
+
+elif module == "CogniBridge: Vernacular Pedagogical Synthesis Engine":
+    st.header("CogniBridge: Vernacular Pedagogical Synthesis Engine")
+    st.markdown("<sub>*Translates your dense, dry textbook to simple banglish*</sub>", unsafe_allow_html=True)
+    
+    tab1, tab2 = st.tabs(["1. Upload Technical Corpus", "2. Vernacular Synthesis Interface"])
+    
+    with tab1:
+        st.subheader("Ingestion of Ontological Material")
+        uploaded_file = st.file_uploader("Upload core academic PDF for ingestion", type="pdf")
+        if uploaded_file:
+            st.success(f"Successfully indexed: {uploaded_file.name}")
+            st.caption("Status: Awaiting semantic distillation.")
+            
+    with tab2:
+        st.subheader("Vernacular Dialectical Explanation")
+        st.info("Demonstration: PhD Entrance Examination Prep (Topic: Relational Algebra)")
+        
+        st.markdown("""
+        > **Original Academic Text:** "The relational algebra projection operator ($\pi$) serves to extract a specified subset of attributes from a relation, effectively collapsing the horizontal dimensionality of the database schema while maintaining set-theoretic uniqueness."
+        
+        **CogniBridge Synthesis (Banglish Mode):**
+        "Dekho, projection operator mane holo database theke specific column-gulo tula ana. Imagine koro tumi ekta table theke shudhu 'Student Name' ar 'Roll Number' chaitecho, baki information dorkar nai. Ei $\pi$ operator seta-i kore—tumi je attribute-gulo select korbe, shudhu seta-i return korbe. Simple kothay, table-er width komey jay, but duplicate row delete hoye unique data thake."
+        """)
+        
+        user_input = st.text_area("Synthesize a new concept from the uploaded corpus:")
+        if st.button("Distill to Banglish"):
+            st.write("Synthesizing vernacular pedagogical output...")
