@@ -29,7 +29,15 @@ st.title("Socrates: Agentic Pedagogical Knowledge Orchestrator")
 if module == "Tutor (Persona-Adaptive)":
     st.header("Tutor: High-Context PDF Synthesis")
     uploaded_file = st.file_uploader("Ingest Technical PDF", type="pdf")
-    tone = st.selectbox("Select Syntactic Persona", ["Senior Researcher", "Ivy League PhD Student", "Munna Bhai Lingo"])
+    tone = st.selectbox("Select Syntactic Persona", [
+        "Senior Researcher", 
+        "Ivy League PhD Student", 
+        "Munna Bhai Lingo",
+        "MIT STEM Professor Insights", 
+        "Harvard STEM Lecturer Lingo", 
+        "Stanford STEM Instructor Perspective", 
+        "Indian University Profession"
+    ])
     if uploaded_file and st.button("Synthesize"):
         st.info(f"Synthesizing knowledge with persona: {tone}")
 
@@ -82,30 +90,30 @@ elif module == "Philosophy and Epistemology":
 
     # 2. Traditions to STEM
     with st.expander("1. Ancient Indian Philosophy to STEM"):
-        st.write("**Nyāya-Vaiśeṣika:** Uses 5-step syllogism (Pratijñā, Hetu, Udāharaṇa, Upanaya, Nigamana) for formal AI inference[cite: 1, 2].")
-        st.write("**Pramāṇa:** Valid means of knowing via Pratyakṣa (Empirical), Anumāna (Inference), and Śabda (Testimony)[cite: 1, 2].")
-        st.write("**Computational Linguistics:** Pāṇini’s Aṣṭādhyāyī for algorithmic syntax representation[cite: 1, 2].")
+        st.write("**Nyāya-Vaiśeṣika:** Uses 5-step syllogism (Pratijñā, Hetu, Udāharaṇa, Upanaya, Nigamana) for formal AI inference.")
+        st.write("**Pramāṇa:** Valid means of knowing via Pratyakṣa (Empirical), Anumāna (Inference), and Śabda (Testimony).")
+        st.write("**Computational Linguistics:** Pāṇini’s Aṣṭādhyāyī for algorithmic syntax representation.")
 
     with st.expander("2. Chinese Philosophy to STEM"):
-        st.write("**Lǐ and Qì:** Principle (geometry/organizing law) and Matter-energy flow in physical/EEE systems[cite: 1].")
-        st.write("**Wú Wéi:** Framework for autonomous, non-aggressive AI optimization[cite: 1].")
-        st.write("**Yīn / Yáng:** Foundation for binary, control systems, and mathematical dualism[cite: 1].")
+        st.write("**Lǐ and Qì:** Principle (geometry/organizing law) and Matter-energy flow in physical/EEE systems.")
+        st.write("**Wú Wéi:** Framework for autonomous, non-aggressive AI optimization.")
+        st.write("**Yīn / Yáng:** Foundation for binary, control systems, and mathematical dualism.")
 
     with st.expander("3. Russian Philosophy to STEM"):
-        st.write("**Kosmizm:** Cosmos as an interconnected whole for space and AI[cite: 1].")
-        st.write("**Vseedinstvo (All-Unity):** Interconnectedness for IoT and distributed computing[cite: 1].")
-        st.write("**Sophiology:** Structural knowledge and limits of mathematical proof[cite: 1, 2].")
+        st.write("**Kosmizm:** Cosmos as an interconnected whole for space and AI.")
+        st.write("**Vseedinstvo (All-Unity):** Interconnectedness for IoT and distributed computing.")
+        st.write("**Sophiology:** Structural knowledge and limits of mathematical proof.")
 
     with st.expander("4. Greek Philosophy to STEM"):
-        st.write("**Socratic Method:** Dialectical inquiry for debugging and AI alignment[cite: 1].")
-        st.write("**Aristotelian Logic:** Foundation for computational syllogism[cite: 1].")
-        st.write("**Platonic Forms:** Abstract mathematical modeling[cite: 1].")
+        st.write("**Socratic Method:** Dialectical inquiry for debugging and AI alignment.")
+        st.write("**Aristotelian Logic:** Foundation for computational syllogism.")
+        st.write("**Platonic Forms:** Abstract mathematical modeling.")
 
     with st.expander("5. Japanese Philosophy to STEM"):
-        st.write("**Ma:** Negative space in signal processing/field theory[cite: 1].")
-        st.write("**Mono no Aware:** Aesthetic/ethical modeling of finite data states[cite: 1].")
-        st.write("**Wabi-Sabi:** Heuristic approximations and fault-tolerant systems[cite: 1].")
-        st.write("**Shuhari:** Learning stages for machine learning mastery[cite: 1].")
+        st.write("**Ma:** Negative space in signal processing/field theory.")
+        st.write("**Mono no Aware:** Aesthetic/ethical modeling of finite data states.")
+        st.write("**Wabi-Sabi:** Heuristic approximations and fault-tolerant systems.")
+        st.write("**Shuhari:** Learning stages for machine learning mastery.")
 
     with st.expander("6. Universities Teaching Philosophy of STEM"):
         st.write("- **MIT:** Philosophy of Physics & AI Ethics")
