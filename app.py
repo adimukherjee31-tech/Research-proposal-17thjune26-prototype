@@ -18,9 +18,8 @@ module = st.sidebar.radio("Navigate Modules", [
     "Literature Review Finder", 
     "Pedagogical Roadmap",
     "NPTEL Transcoding Engine",
-    "Philosophy & Epistemology",
-    "Discovery Pathway",
-    "CogniBridge (Vernacular: Banglish)"
+    "Radhakrishnan-Socratic Inquiry",
+    "Discovery Pathway"
 ])
 
 # --- MAIN CONTENT AREA ---
@@ -67,52 +66,27 @@ elif module == "NPTEL Transcoding Engine":
         response = model.generate_content(f"Perform pedagogical distillation: {transcript}")
         st.write(response.text)
 
-elif module == "Philosophy & Epistemology":
-    st.header("Philosophy & Epistemology: Foundational Inquiries")
-    col1, col2 = st.columns(2)
-    with col1:
-        st.subheader("Western Analytical Frameworks")
-        western_data = {
-            "General Philosophy of Science & Math": "Ontology & Epistemology: Ontology asks what exists; Epistemology asks how we know what we know. Realism vs. Anti-Realism: Theories as objective reality vs. useful tools. Platonism vs. Nominalism: Abstract existence vs. linguistic tools. Reductionism vs. Emergence: Explaining systems by parts vs. holistic properties.",
-            "Philosophy of Computer Science & AI": "Church-Turing Thesis: Limits of computation. Strong vs. Weak AI: Simulation vs. consciousness. The Chinese Room Argument: Questioning symbol manipulation as understanding. Miscomputation: Philosophical analysis of algorithmic bias.",
-            "Philosophy of Physics": "The Measurement Problem: Collapse of quantum superposition. Spacetime Substantivalism vs. Relationalism: Spacetime as entity vs. relation. Determinism vs. Indeterminism: Cause/effect vs. randomness.",
-            "Philosophy of Engineering": "Technical Artifacts: Structure vs. function. Epistemology of Measurement: Reliability of sensor data. Systems Theory & Teleology: Goal-oriented networks."
-        }
-        selected_west = st.selectbox("Western Axioms", list(western_data.keys()))
-        st.info(western_data[selected_west])
-    with col2:
-        st.subheader("Eastern & Russian Metaphysical Systems")
-        eastern_data = {
-            "Ancient Indian Philosophy": "Pratyaksha (Perception): AI vs. human consciousness. Anumana (Inference): Algorithmic logic. Anviksiki: Logical reasoning. Asatkara-vada & Satkarya-vada: Causation theories. Shabda & Sphota: NLP/Signal processing. Dharma: Ethics and algorithmic governance.",
-            "Chinese Philosophy": "Dao (Tao): Dynamic equilibrium. Yin and Yang: Complementary forces. Wuwei: Emergent autonomous behavior. Li & Qi: Hardware-software dichotomy. Xin (Heart-Mind): Holistic AI integration.",
-            "Japanese Philosophy": "Ma (Negative Space): Information theory/silence. Mono no Aware: HCI emotional resonance. Shokunin: Hardware craftsmanship. Ba (Place/Context): Distributed computing/IoT. Ki (Energy): Kinetic energy mapping.",
-            "Russian Philosophy": "Vseedinstvo (Total-Unity): Interconnected grids. Russkiy Kosmizm: Advanced AI/Transhumanism. Deiatel'nost' (Activity Theory): HCI and tool-mediated consciousness. Sophiology (Wisdom): Boundaries of AGI."
-        }
-        selected_east = st.selectbox("Eastern/Russian Axioms", list(eastern_data.keys()))
-        st.info(eastern_data[selected_east])
+elif module == "Radhakrishnan-Socratic Inquiry":
+    st.header("Radhakrishnan-Socratic Inquiry: Foundational Axioms")
+    phi_domain = st.selectbox("Select Foundational Inquiry", ["Philosophy of Computer Science", "Philosophy of Physics", "Philosophy of Mathematics", "Philosophy of Electrical Engineering", "Philosophy of Artificial Intelligence"])
+    phi_data = {
+        "Philosophy of Computer Science": "The ontological status of algorithms—exploring both the functional logic (Western) and the holistic structural patterns (Eastern).",
+        "Philosophy of Physics": "Bridging classical determinism (Western mechanical realism) with the interdependence of systems (Eastern relational ontology).",
+        "Philosophy of Mathematics": "The interplay between Formalism (axiomatic rigor) and the intuitive, unified nature of mathematical structures.",
+        "Philosophy of Electrical Engineering": "System stability defined through control theory (analytic) combined with the concept of systemic harmony (relational).",
+        "Philosophy of Artificial Intelligence": "A dialectical study of consciousness—synthesizing computational processing (syntax) with embodied, relational understanding (semantics)."
+    }
+    if st.button("Query Foundational Axioms"):
+        st.info(phi_data[phi_domain])
+        st.caption("Methodology: Epistemic parity—Deconstruction (Western) combined with Integration (Eastern).")
 
 elif module == "Discovery Pathway":
     st.header("Discovery Pathway: Inquiry, Critical Thinking & Computational Skills")
     pathway_data = {
-        "EEE": {"Problem": "Designing power grids.", "Inquiry": "How to minimize energy waste?", "Computational Thinking": "Decompose into logical stages.", "Critical Thinking": "Evaluate thermal limits."},
-        "AI": {"Problem": "Mimicking intelligence.", "Inquiry": "How do models determine context?", "Computational Thinking": "Break down text into tokens.", "Critical Thinking": "Question data bias."}
+        "EEE": {"Problem": "Designing power grids.", "Inquiry": "How to minimize energy waste?", "Computational Thinking": "Decompose into logical stages.", "Critical Thinking": "Evaluate thermal limits.", "Examples": "IoT solar controller; Audio noise filter."},
+        "AI": {"Problem": "Mimicking intelligence.", "Inquiry": "How do models determine context?", "Computational Thinking": "Break down text into tokens.", "Critical Thinking": "Question data bias.", "Examples": "College admissions chatbot; Fake news flagger."}
     }
     selected_domain = st.selectbox("Select Domain", list(pathway_data.keys()))
     data = pathway_data[selected_domain]
     st.write(f"**Inquiry:** {data['Inquiry']}")
     st.write(f"**Computational Thinking:** {data['Computational Thinking']}")
-
-elif module == "CogniBridge (Vernacular: Banglish)":
-    st.header("CogniBridge (Vernacular: Banglish)")
-    st.markdown("<sub>*Translates your dense, dry textbook to simple banglish*</sub>", unsafe_allow_html=True)
-    tab1, tab2 = st.tabs(["1. Upload Technical Corpus", "2. Vernacular Synthesis Interface"])
-    with tab1:
-        st.subheader("Ingestion of Ontological Material")
-        uploaded_file = st.file_uploader("Upload core academic PDF", type="pdf")
-        if uploaded_file:
-            st.success(f"Successfully indexed: {uploaded_file.name}")
-    with tab2:
-        st.subheader("Vernacular Dialectical Explanation")
-        st.markdown("> **Original Academic Text:** \"The relational algebra projection operator ($\pi$) serves to extract a specified subset...\" \n\n **CogniBridge Synthesis:** \"Dekho, projection operator mane holo database theke specific column-gulo tula ana...\"")
-        if st.button("Distill to Banglish"):
-            st.write("Synthesizing...")
