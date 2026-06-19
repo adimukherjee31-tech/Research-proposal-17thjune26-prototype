@@ -32,10 +32,15 @@ if module == "Tutor (Persona-Adaptive)":
     tone = st.selectbox("Select Syntactic Persona", [
         "Senior Researcher", 
         "Ivy League PhD Student", 
-        "Munna Bhai Lingo", 
-        "UGCNET Coach", 
-        "CSIR NET Coach", 
-        "GATE Coach"
+        "Munna Bhai Lingo",
+        "GATE Coaching Instructor",
+        "UGCNET Coach",
+        "MIT STEM PROFESSOR INSIGHTS", 
+        "HARVARD STEM LECTURER/PROFESSOR PERSPECTIVE", 
+        "OXFORD/CAMBRIDGE PHD LEVEL LINGO", 
+        "STANFORD PROFESSOR STYLE", 
+        "INDIAN UNIVERSITY PROFESSOR DIALET", 
+        "ENOUGH-TO-PASS-SEMESTER"
     ])
     if uploaded_file and st.button("Synthesize"):
         st.info(f"Synthesizing knowledge with persona: {tone}")
