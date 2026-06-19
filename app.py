@@ -48,8 +48,21 @@ elif module == "Literature Review Finder":
 
 elif module == "Pedagogical Roadmap":
     st.header("Pedagogical Roadmap: Ontological Mapping")
-    domain_map = st.selectbox("Select Domain", ["BTech EEE", "BTech AI ML", "BTech CSE"])
-    if st.button("Generate Roadmap"):
+    
+    # Knowledge Graph Data extracted from "knowledge graph.JPG" and "knowledge graph part 2.JPG"
+    kg_data = {
+        "Physics to EEE": "Electromagnetism → Maxwell’s Equations → RF Engineering; Thermodynamics → Power Systems.",
+        "Physics to AI": "Fluid Dynamics → Physics-Informed Neural Networks (PINNs).",
+        "EEE to AI": "Control Theory → Reinforcement Learning; Circuit Theory → Neuromorphic Computing.",
+        "Math to EEE/AI": "Linear Algebra → Deep Learning; Calculus → Optimization → Machine Learning; Graph Theory → Routing → Communication Systems."
+    }
+    
+    selected_kg = st.selectbox("Select Knowledge Graph Interdependency", list(kg_data.keys()))
+    st.info(f"### Mapping: {selected_kg}")
+    st.write(kg_data[selected_kg])
+    
+    st.markdown("---")
+    if st.button("Generate Deterministic Roadmap"):
         st.success("Roadmap visualized: Core competency mapping complete.")
 
 elif module == "NPTEL Transcoding Engine":
