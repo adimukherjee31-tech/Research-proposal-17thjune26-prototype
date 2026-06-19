@@ -49,16 +49,15 @@ elif module == "Literature Review Finder":
 elif module == "Pedagogical Roadmap":
     st.header("Pedagogical Roadmap: Ontological Mapping")
     
-    # Knowledge Graph Data extracted from "knowledge graph.JPG" and "knowledge graph part 2.JPG"
+    # Restored data with full causal relationships from knowledge graph.JPG and knowledge graph part 2.JPG
     kg_data = {
-        "Physics to EEE": "Electromagnetism → Maxwell’s Equations → RF Engineering; Thermodynamics → Power Systems.",
-        "Physics to AI": "Fluid Dynamics → Physics-Informed Neural Networks (PINNs).",
-        "EEE to AI": "Control Theory → Reinforcement Learning; Circuit Theory → Neuromorphic Computing.",
-        "Math to EEE/AI": "Linear Algebra → Deep Learning; Calculus → Optimization → Machine Learning; Graph Theory → Routing → Communication Systems."
+        "Mathematics as Foundation": "Linear Algebra → underpins → Deep Learning; Calculus → drives → Optimization → powers → Machine Learning; Graph Theory → optimizes → Routing → used in → Communication Systems.",
+        "Physics to EEE & ECE": "Electromagnetism → governs → Maxwell’s Equations → dictate → RF Engineering (ECE); Thermodynamics → regulates → Power Systems → critical in → EEE.",
+        "Engineering to AI/ML (Convergence)": "Control Theory (EEE/Mechanical) → forms the basis of → Reinforcement Learning (AI/ML); Circuit Theory (ECE) → drives → Neuromorphic Computing (AI/ML); Fluid Dynamics (Mechanical) → optimized via → Physics-Informed Neural Networks (PINNs) (AI/ML); Signal Processing (ECE) → uses → Feature Extraction → feeds into → Computer Vision (AI/ML)."
     }
     
     selected_kg = st.selectbox("Select Knowledge Graph Interdependency", list(kg_data.keys()))
-    st.info(f"### Mapping: {selected_kg}")
+    st.info(f"### Functional Dependencies: {selected_kg}")
     st.write(kg_data[selected_kg])
     
     st.markdown("---")
