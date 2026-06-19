@@ -29,7 +29,14 @@ st.title("Socrates: Agentic Pedagogical Knowledge Orchestrator")
 if module == "Tutor (Persona-Adaptive)":
     st.header("Tutor: High-Context PDF Synthesis")
     uploaded_file = st.file_uploader("Ingest Technical PDF", type="pdf")
-    tone = st.selectbox("Select Syntactic Persona", ["Senior Researcher", "Ivy League PhD Student", "Munna Bhai Lingo"])
+    tone = st.selectbox("Select Syntactic Persona", [
+        "Senior Researcher", 
+        "Ivy League PhD Student", 
+        "Munna Bhai Lingo", 
+        "UGCNET Coach", 
+        "CSIR NET Coach", 
+        "GATE Coach"
+    ])
     if uploaded_file and st.button("Synthesize"):
         st.info(f"Synthesizing knowledge with persona: {tone}")
 
