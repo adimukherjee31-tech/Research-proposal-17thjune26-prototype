@@ -7,107 +7,73 @@ st.set_page_config(page_title="Socrates: Pedagogical Knowledge Orchestrator", la
 # Ensure API Key is handled safely
 try:
     genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-except Exception as e:
+except Exception:
     st.error("API Key not found. Please add GOOGLE_API_KEY to Streamlit Secrets.")
 
-# --- PAGE HEADER ---
-st.title("🏛️ Socrates: Agentic Pedagogical Knowledge Orchestrator")
-st.markdown("### *A Deterministic Framework for Multi-Modal Academic Synthesis*")
-
-# Tabs for Modular Research Workflow
-# Ensure the number of variables matches the number of strings in the list
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-    "Tutor (Persona-Adaptive Synthesis)", 
+# --- SIDEBAR NAVIGATION ---
+st.sidebar.title("🏛️ Socrates Workbench")
+module = st.sidebar.radio("Navigate Modules", [
+    "Tutor (Persona-Adaptive)", 
     "Research Gap Identifier", 
     "Literature Review Finder", 
     "Pedagogical Roadmap",
-    "NPTEL Asynchronous Pedagogical Transcoding Engine",
+    "NPTEL Transcoding Engine",
     "Philosophy & Epistemology"
 ])
 
-with tab1:
+# --- MAIN CONTENT AREA ---
+st.title("Socrates: Agentic Pedagogical Knowledge Orchestrator")
+
+if module == "Tutor (Persona-Adaptive)":
     st.header("Tutor: High-Context PDF Synthesis")
     uploaded_file = st.file_uploader("Ingest Technical PDF", type="pdf")
-    tone = st.selectbox("Select Syntactic Persona", [
-        "Senior Professional Researcher", "Ivy League PhD Student", 
-        "GATE Coach Tone", "UGC-NET Coach Tone", "Simple Indian English", "Munna Bhai Lingo"
-    ])
-    
-    if uploaded_file and st.button("Synthesize Knowledge"):
-        with st.spinner("Executing agentic analysis..."):
-            st.text_area("Synthesized Analysis", f"Parsed for deep semantic threads. Output conditioned to: {tone}")
+    tone = st.selectbox("Select Syntactic Persona", ["Senior Researcher", "Ivy League PhD Student", "Munna Bhai Lingo"])
+    if uploaded_file and st.button("Synthesize"):
+        st.info(f"Synthesizing knowledge with persona: {tone}")
 
-with tab2:
+elif module == "Research Gap Identifier":
     st.header("Research Gap Identifier")
-    domain = st.selectbox("Select Domain", ["EEE", "AI/ML", "CSE", "ECE", "Mechanical", "Physics MSc", "Math MSc"])
-    exam = st.selectbox("Target Assessment", ["GATE", "IIT-JAM", "CUET", "UGC-NET"])
-    user_query = st.text_area("Specific topic or chapter to analyze:")
-    
-    if st.button("Analyze Requirement Gap"):
-        with st.spinner("Mapping curriculum to examination standards..."):
-            model = genai.GenerativeModel("gemini-2.0-flash")
-            prompt = f"Analyze the gap between the {domain} syllabus and {exam} requirements for the topic: {user_query}. Provide a structured gap analysis and study strategy."
-            response = model.generate_content(prompt)
-            st.markdown("### Gap Analysis & Strategic Recommendations")
-            st.write(response.text)
+    domain = st.selectbox("Select Domain", ["EEE", "AI/ML", "CSE", "Physics MSc"])
+    user_query = st.text_area("Specific topic to analyze:")
+    if st.button("Analyze Gap"):
+        model = genai.GenerativeModel("gemini-2.0-flash")
+        response = model.generate_content(f"Analyze gap for {domain}: {user_query}")
+        st.write(response.text)
 
-with tab3:
+elif module == "Literature Review Finder":
     st.header("Literature Review Finder")
-    search_query = st.text_input("Query ArXiv.org for Research Synthesis:")
+    search_query = st.text_input("Query ArXiv.org:")
     if st.button("Query Research Nexus"):
-        st.write(f"Orchestrating search across ArXiv repositories for: {search_query}")
-        st.text_area("Research Synthesis & Gap Analysis", "Foundational papers retrieved. Analysis of research gaps in progress...")
+        st.write("Orchestrating search across repositories...")
 
-with tab4:
+elif module == "Pedagogical Roadmap":
     st.header("Pedagogical Roadmap: Ontological Mapping")
-    domain_map = st.selectbox("Select Domain for Roadmap", ["BTech EEE", "BTech AI ML", "BTech CSE", "BTech ECE", "BTech Mechanical", "Physics MSc", "Math MSc"])
-    if st.button("Generate Deterministic Roadmap"):
-        st.write(f"Mapping curriculum for {domain_map}...")
+    domain_map = st.selectbox("Select Domain", ["BTech EEE", "BTech AI ML", "BTech CSE"])
+    if st.button("Generate Roadmap"):
         st.success("Roadmap visualized: Core competency mapping complete.")
 
-with tab5:
+elif module == "NPTEL Transcoding Engine":
     st.header("NPTEL Asynchronous Pedagogical Transcoding Engine")
-    st.markdown("*A high-fidelity framework for the semantic distillation of asynchronous lecture transcripts.*")
-    
-    transcript_input = st.text_area("Ingest Lecture Transcript Vector:", height=200, placeholder="Paste the raw YouTube/NPTEL transcript here...")
-    
+    transcript = st.text_area("Paste NPTEL/Lecture Transcript:", height=200)
     if st.button("Transcode & Distill"):
-        with st.spinner("Executing semantic decomposition..."):
-            model = genai.GenerativeModel("gemini-2.0-flash")
-            prompt = f"""
-            Act as an elite Ivy League Academic Fellow. Perform a pedagogical distillation 
-            of the following lecture transcript. Deconstruct the primary conceptual threads, 
-            resolve technical ambiguity, and reconstruct the output into a 
-            concise, highly structured pedagogical summary: {transcript_input}
-            """
-            response = model.generate_content(prompt)
-            
-            st.markdown("### Distilled Conceptual Output")
-            st.write(response.text)
+        model = genai.GenerativeModel("gemini-2.0-flash")
+        response = model.generate_content(f"Perform pedagogical distillation: {transcript}")
+        st.write(response.text)
 
-with tab6:
+elif module == "Philosophy & Epistemology":
     st.header("Philosophy & Epistemology: Foundational Inquiries")
-    st.markdown("*A formal meta-analysis of core disciplinary axioms.*")
-    
     phi_domain = st.selectbox("Select Foundational Inquiry", [
-        "Philosophy of Computer Science", 
-        "Philosophy of Physics", 
-        "Philosophy of Mathematics", 
-        "Philosophy of Electrical Engineering", 
+        "Philosophy of Computer Science", "Philosophy of Physics", 
+        "Philosophy of Mathematics", "Philosophy of Electrical Engineering", 
         "Philosophy of Artificial Intelligence"
     ])
-    
-    # PhD-Level Dummy Data
     phi_data = {
-        "Philosophy of Computer Science": "Focus on the ontological status of algorithms—are they mathematical objects or physical entities? Inquiry into Church-Turing thesis limits.",
-        "Philosophy of Physics": "Exploration of the transition from classical determinism to quantum indeterminacy; investigation into the measurement problem and realism.",
-        "Philosophy of Mathematics": "Examination of Platonism vs. Formalism; the epistemic access to abstract mathematical structures.",
-        "Philosophy of Electrical Engineering": "Inquiry into the 'nature of control' and energy flow; the teleology of system stability and feedback loops.",
-        "Philosophy of Artificial Intelligence": "Phenomenological critique of machine consciousness; the gap between syntactic processing and semantic understanding (Searle's Chinese Room)."
+        "Philosophy of Computer Science": "Ontological status of algorithms—mathematical objects vs. physical entities.",
+        "Philosophy of Physics": "Transition from classical determinism to quantum indeterminacy.",
+        "Philosophy of Mathematics": "Platonism vs. Formalism; epistemic access to abstract structures.",
+        "Philosophy of Electrical Engineering": "Teleology of system stability and control theory.",
+        "Philosophy of Artificial Intelligence": "Phenomenological critique of machine consciousness; the gap between syntax and semantics."
     }
-    
     if st.button("Query Foundational Axioms"):
-        st.info(f"### Meta-analysis of: {phi_domain}")
-        st.write(phi_data[phi_domain])
-        st.markdown("---")
+        st.info(phi_data[phi_domain])
         st.caption("Framework: Epistemic structural realism applied to disciplinary paradigms.")
