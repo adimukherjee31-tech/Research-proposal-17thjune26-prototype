@@ -15,12 +15,13 @@ st.title("🏛️ Socrates: Agentic Pedagogical Knowledge Orchestrator")
 st.markdown("### *A Deterministic Framework for Multi-Modal Academic Synthesis*")
 
 # Tabs for Modular Research Workflow
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "Tutor (Persona-Adaptive Synthesis)", 
     "Research Gap Identifier", 
     "Literature Review Finder", 
     "Pedagogical Roadmap",
-    "NPTEL Asynchronous Pedagogical Transcoding Engine"
+    "NPTEL Asynchronous Pedagogical Transcoding Engine",
+    "Vernacular Pedagogical Localization Engine"
 ])
 
 with tab1:
@@ -82,3 +83,36 @@ with tab5:
             
             st.markdown("### Distilled Conceptual Output")
             st.write(response.text)
+
+with tab6:
+    st.header("Vernacular Pedagogical Localization Engine")
+    st.markdown("*Adaptive dialectic synthesis for high-retention learner comprehension.*")
+    
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        text_to_localize = st.text_area("Input Technical Concepts:", height=150, placeholder="Paste technical text here...")
+    with col2:
+        target_dialect = st.selectbox("Target Vernacular Mode", ["Banglish", "Hinglish", "Tamilish"])
+        st.info("The engine will perform semantic re-encoding into the selected colloquial script while maintaining technical integrity.")
+    
+    if st.button("Initialize Localization"):
+        if text_to_localize:
+            with st.spinner("Executing phonetic and semantic re-coding..."):
+                model = genai.GenerativeModel("gemini-2.0-flash")
+                prompt = f"""
+                Act as a specialist in Cognitive Linguistics and Pedagogy. 
+                Translate the following technical text into {target_dialect} (the common 
+                colloquial blend of English and the native language). 
+                
+                Rules: 
+                1. Preserve all technical terminology and nomenclature (do not translate terms like 'Algorithm', 'Circuit', 'Function'). 
+                2. Use the standard Latin script for the vernacular output. 
+                3. Ensure the tone is peer-to-peer and highly accessible.
+                
+                Input: {text_to_localize}
+                """
+                response = model.generate_content(prompt)
+                st.markdown("### Localized Pedagogical Output")
+                st.write(response.text)
+        else:
+            st.warning("Please provide input text for localization.")
